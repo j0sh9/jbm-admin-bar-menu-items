@@ -2,12 +2,16 @@
 /*
 Plugin Name: _Admin Bar Menu Items
 Description: Adds shortcuts to the admin menu bar
-Version: 1.0
+Version: 1.01
 */
 
 add_action('admin_bar_menu', 'jbm_add_toolbar_items', 100);
 function jbm_add_toolbar_items($admin_bar){
+	if ( ! current_user_can('manage_affiliates') ) return;
 	$today = date('Ymd', strtotime(current_time('mysql')));
+	
+	//Order Search
+	if ( is_plugin_active('woocommerce/woocommerce.php') ) :
     $admin_bar->add_menu( array(
         'id'    => 'woo-orders',
         'title' => '<input type="search" name="admin_order_search" id="jbm_order_search" placeholder="Order Search" />',
@@ -64,6 +68,7 @@ function jbm_add_toolbar_items($admin_bar){
         'title' => 'Failed Orders',
         'href'  => '/wp-admin/edit.php?post_status=wc-failed&post_type=shop_order',
     ));
+	endif;
 	
 	//User Search
 	
@@ -75,4 +80,18 @@ function jbm_add_toolbar_items($admin_bar){
             'html' => '<script>jQuery("#jbm_user_search").keyup(function(event){ if(event.keyCode == 13){ window.location = "/wp-admin/users.php?s="+this.value; } });</script>',
         ),
     ));
+	
+	//Affiliate Search
+	if ( is_plugin_active('affiliate-wp/affiliate-wp.php') ) :
+	
+    $admin_bar->add_menu( array(
+        'id'    => 'jbm-affiliate-search',
+        'title' => '<input type="search" name="jbm_affiliate_search" id="jbm_affiliate_search" placeholder="Affiliate Search" />',
+        //'href'  => '/wp-admin/edit.php?post_type=shop_order',
+        'meta'  => array(
+            'html' => '<script>jQuery("#jbm_affiliate_search").keyup(function(event){ if(event.keyCode == 13){ window.location = "/wp-admin/admin.php?page=affiliate-wp-affiliates&s="+this.value; } });</script>',
+        ),
+    ));
+	
+	endif;
 }
