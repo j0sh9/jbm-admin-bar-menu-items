@@ -2,7 +2,7 @@
 /*
 Plugin Name: _Admin Bar Menu Items
 Description: Adds shortcuts to the admin menu bar
-Version: 1.02
+Version: 1.03
 */
 
 add_action('admin_bar_menu', 'jbm_add_toolbar_items', 100);
@@ -14,7 +14,7 @@ function jbm_add_toolbar_items($admin_bar){
 	
     $admin_bar->add_menu( array(
         'id'    => 'jbm-user-search',
-        'title' => '<input type="search" name="jbm_user_search" id="jbm_user_search" placeholder="User Search" />',
+        'title' => '<input style="padding:0 8px;" class="jbm_admin_search" type="search" name="jbm_user_search" id="jbm_user_search" placeholder="User Search" />',
         //'href'  => '/wp-admin/edit.php?post_type=shop_order',
         'meta'  => array(
             'html' => '<script>jQuery("#jbm_user_search").keyup(function(event){ if(event.keyCode == 13){ window.location = "/wp-admin/users.php?s="+this.value; } });</script>',
@@ -26,7 +26,7 @@ function jbm_add_toolbar_items($admin_bar){
 	
     $admin_bar->add_menu( array(
         'id'    => 'jbm-affiliate-search',
-        'title' => '<input type="search" name="jbm_affiliate_search" id="jbm_affiliate_search" placeholder="Affiliate Search" />',
+        'title' => '<input style="padding:0 8px;" class="jbm_admin_search" type="search" name="jbm_affiliate_search" id="jbm_affiliate_search" placeholder="Affiliate Search" />',
         //'href'  => '/wp-admin/edit.php?post_type=shop_order',
         'meta'  => array(
             'html' => '<script>jQuery("#jbm_affiliate_search").keyup(function(event){ if(event.keyCode == 13){ window.location = "/wp-admin/admin.php?page=affiliate-wp-affiliates&s="+this.value; } });</script>',
@@ -77,7 +77,7 @@ function jbm_add_toolbar_items($admin_bar){
 	if ( is_plugin_active('woocommerce/woocommerce.php') ) :
     $admin_bar->add_menu( array(
         'id'    => 'woo-orders',
-        'title' => '<input type="search" name="admin_order_search" id="jbm_order_search" placeholder="Order Search" />',
+        'title' => '<input style="padding:0 8px;" class="jbm_admin_search" type="search" name="admin_order_search" id="jbm_order_search" placeholder="Order Search" />',
         //'href'  => '/wp-admin/edit.php?post_type=shop_order',
         'meta'  => array(
             'html' => '<script>jQuery("#jbm_order_search").keyup(function(event){ if(event.keyCode == 13){ window.location = "/wp-admin/edit.php?post_type=shop_order&s="+this.value; } });</script>',
